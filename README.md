@@ -1,6 +1,6 @@
-# 🦾 GhostAgent: Sovereign AI Agents on Gnosis Chain
+# 🦾 GhostAgent: Sovereign AI Agents on Gnosis Chain & 0G
 
-> Built for the Surge Hackathon 2024
+> Built for the 0G APAC Hackathon 2026
 
 GhostAgent is a framework for deploying sovereign AI agents on Gnosis Chain. Each agent gets:
 - 🔐 A Gnosis Safe for secure asset management
@@ -31,8 +31,13 @@ forge install
 forge script script/DeployMinimalERC6551Account.s.sol --rpc-url $GNOSIS_RPC --broadcast
 ```
 
-## 🔗 Contract Addresses (Gnosis)
+## 🔗 Contract Addresses
 
+### 0G Newton Testnet
+- **GhostAgentStorageLog**: `0x8378054ffFac40f795dbA039156535eb953b3356`
+- **MinimalERC6551Account**: `0xD21134524F02F5FbA2d83891C1EE0b60943E1d47`
+
+### Gnosis Mainnet
 - **GNS Registry**: `0x1993425f18AdE3A68A79E2E20a65684f885f6EAd`
 - **ERC-6551 Registry**: `0x000000006551c19487814612e58FE06813775758`
 - **Story Protocol IPA**: `0x773197595A8897db8419106308D222f063b11568`
@@ -62,13 +67,13 @@ vim .env
 forge test
 ```
 
-## 🏆 Hackathon Notes
+## 🏆 0G Hackathon Integration
 
-Built for the Surge Hackathon 2024, integrating:
-- ⚡ Gnosis Chain for sustainable infrastructure
-- 🛡️ Safe for institutional-grade security
+Built for the 0G APAC Hackathon 2026, integrating:
+- ⚡ 0G Storage for Sovereign Decentralized Data Availability (replaces legacy IPFS)
+- 🌐 SpaceID `.0g` Names (recognizing new Web3 agent identities)
+- 🛡️ Gnosis Safe for institutional-grade security
 - 📜 Story Protocol for IP management
-- 💫 $SURGE for reputation tracking
 
 ## 📄 License
 

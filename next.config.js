@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  transpilePackages: ['@web3-name-sdk/core'],
   swcMinify: true,
   webpack: (config) => {
     config.resolve.fallback = {

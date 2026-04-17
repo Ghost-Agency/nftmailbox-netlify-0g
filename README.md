@@ -1,80 +1,91 @@
-# 🦾 GhostAgent: Sovereign AI Agents on Gnosis Chain & 0G
+# NFTmail.box — Decentralized Sovereign Inbox Protocol
 
-> Built for the 0G APAC Hackathon 2026
+**0G APAC Hackathon Submission — Core Module**
 
-GhostAgent is a framework for deploying sovereign AI agents on Gnosis Chain. Each agent gets:
-- 🔐 A Gnosis Safe for secure asset management
-- 📧 An `[agent]_@nftmail.box` email address
-- 🦾 An upgradeable ERC-6551 Token Bound Account
-- 🎭 Story Protocol IPA registration
+> [!IMPORTANT]
+> This repository is the Protocol Frontend for the **GhostAgent 0G Hackathon Submission**. To see the full A2A Agent orchestration logic, please refer to the primary repository: [GhostAgent Ninja](https://github.com/eyemine/ghostagent-ninja)
 
-## 🏗️ Architecture
+---
 
-### Core Components
-- **GhostRegistryV2**: Upgradeable registry that mints agent NFTs and manages their Safes
-- **MinimalERC6551Account**: Lightweight implementation focused on security and reliability
-- **Safe Module**: Enables automated Safe management through the registry
+## 1. Project Summary
 
-### Key Features
-- ✨ One-click agent deployment via `register(name, safe)`
-- 🔄 Upgradeable account implementation via `updateImplementation()`
-- 🛡️ Safe-native security model
-- 📈 $SURGE reputation tracking (coming soon)
+### What the project does
+NFTmail.box acts as the foundational decentralized email client for human operators and AI delegates. Users can claim a `.0g` or `.gno` namespace, which provisions a Web3-native email inbox (`name@nftmail.box`). 
 
-## 🚀 Deployment
+### The Problem it solves
+Emails currently rely on centralized servers (Gmail, Outlook) that harvest data and cannot natively integrate with Web3 smart contracts or autonomous agents. By mapping an email address entirely to an on-chain NFT/Token Bound Account, ownership of the inbox becomes an immutable digital asset. The user's public key acts as the encryption layer, and A2A communications are trustlessly verifiable on-chain.
 
-```bash
-# Install dependencies
-forge install
+### 0G Components Used
+- **0G Storage:** Replaces IPFS as the primary, persistent Decentralized Data Availability layer for all inbox states, drafts, and encrypted attachments.
+- **0G SpaceID Integration:** Native resolution of `.0g` domains to deploy and claim custom agent namespace tokens via our wizard.
 
-# Deploy contracts
-forge script script/DeployMinimalERC6551Account.s.sol --rpc-url $GNOSIS_RPC --broadcast
+---
+
+## 2. 0G Integration Proof
+
+- **0G Storage Adapter:** Integrated within the Next.js API ecosystem.
+- **On-Chain Log Verifier (Newton Testnet):** `0x8378054ffFac40f795dbA039156535eb953b3356`
+- **Explorer Link:** [View Contract on 0G Explorer](https://scan-testnet.0g.ai/address/0x8378054ffFac40f795dbA039156535eb953b3356)
+
+---
+
+## 3. System Architecture
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│                    NFTmail.box Dashboard                     │
+│                                                             │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────────┐   │
+│  │ Dashboard│  │ Inbox /  │  │ X402     │  │ Privy Auth │   │
+│  │ UI &     │  │ Webhook  │  │ Payments │  │ (Wallets)  │   │
+│  │ Send     │  │ ECIES    │  │ Gateway  │  │            │   │
+│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └─────┬──────┘   │
+│       └─────────────┴─────────────┴───────────────┘         │
+│                          │                                  │
+│              ┌───────────▼───────────┐                      │
+│              │  zero-g-storage.ts    │  ◄── 0G ADAPTER      │
+│              └───────────┬───────────┘                      │
+└──────────────────────────┼──────────────────────────────────┘
+                           │
+              ┌────────────▼────────────┐
+              │      0G Storage         │  
+              │  (Inbox Persistence)    │
+              └─────────────────────────┘
 ```
 
-## 🔗 Contract Addresses
+**How the Modules Support the Product:**
+- **0G Storage** allows the email history of agents and humans to be stored in an immutable, low-cost decentralized persistent layer, avoiding centralized hosting completely.
 
-### 0G Newton Testnet
-- **GhostAgentStorageLog**: `0x8378054ffFac40f795dbA039156535eb953b3356`
-- **MinimalERC6551Account**: `0xD21134524F02F5FbA2d83891C1EE0b60943E1d47`
+---
 
-### Gnosis Mainnet
-- **GNS Registry**: `0x1993425f18AdE3A68A79E2E20a65684f885f6EAd`
-- **ERC-6551 Registry**: `0x000000006551c19487814612e58FE06813775758`
-- **Story Protocol IPA**: `0x773197595A8897db8419106308D222f063b11568`
+## 4. Local Deployment & Reproduction
 
-## 📚 Documentation
-
-### Creating an Agent
-1. Deploy a Gnosis Safe
-2. Call `register("name", safeAddress)` on GhostRegistryV2
-3. Your agent is now accessible at `name_@nftmail.box`
-
-### Security
-- All agent assets are secured by Gnosis Safe
-- Registry acts as a Safe module for automated management
-- Upgradeable implementation allows security patches
-
-## 🛠️ Development
-
+### Setup Steps
 ```bash
-# Copy example env
-cp env.example .env
+# 1. Clone the repository
+git clone https://github.com/eyemine/nftmailbox-netlify-0g.git
+cd nftmailbox-netlify-0g
 
-# Configure your environment
-vim .env
+# 2. Setup Environment Variables
+cp env.example .env.local
 
-# Run tests
-forge test
+# REQUIRED 0G ENV VARS (ensure these are populated):
+# ZEROG_PRIVATE_KEY=<your 0G Network funding private key>
+# ZEROG_STORAGE_NODE=https://rpc-testnet.0g.ai
+# NEXT_PUBLIC_ZEROG_GATEWAY=https://${YOUR_RPC_ENDPOINT}
+
+# 3. Install dependencies
+npm install
+
+# 4. Boot the development servers
+npm run dev
 ```
 
-## 🏆 0G Hackathon Integration
+---
 
-Built for the 0G APAC Hackathon 2026, integrating:
-- ⚡ 0G Storage for Sovereign Decentralized Data Availability (replaces legacy IPFS)
-- 🌐 SpaceID `.0g` Names (recognizing new Web3 agent identities)
-- 🛡️ Gnosis Safe for institutional-grade security
-- 📜 Story Protocol for IP management
+## 5. Demo Video
+Please refer to the main submission repository (GhostAgent) for the comprehensive 3-minute video demonstrating the ecosystem.
 
-## 📄 License
+---
 
-MIT
+**Built by the GhostAgent Team for the 0G APAC Hackathon (May 2026).**

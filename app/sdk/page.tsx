@@ -136,6 +136,7 @@ export default function SDKPage() {
               <span style={{ fontFamily: "'Ayuthaya', serif", color: '#d8d4cf' }} className="text-base tracking-wide">
                 nftmail.box
               </span>
+              <span className="rounded-full bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 text-[0.6rem] font-bold text-emerald-400 uppercase tracking-widest shadow-[0_0_10px_rgba(16,185,129,0.2)] ml-2 relative top-[-2px]">Beta</span>
             </Link>
           </div>
           <Link
